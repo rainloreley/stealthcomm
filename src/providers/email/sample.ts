@@ -1,4 +1,4 @@
-const email_sample = `
+const sample: string = `
 Jemand hat dir eine Nachricht geschickt!<br/>
 ============================================<br/>
 <br/>
@@ -14,4 +14,4 @@ $FREEFORM$<br/>
 <b>E-Mail-Adresse:</b> $SENDER_EMAIL$<br/>
 `;
 
-export default email_sample;
+export default sample;

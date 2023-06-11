@@ -19,9 +19,24 @@ model Object {
   ownerId String
 }
 
-model User {
+model NotificationProvider {
   uid     String @id @default(uuid())
-  name    String
-  email   String
-  objects Object[]
+  type    NotificationProviderType
+  config  String
+  user    User @relation(fields: [userId], references: [uid])
+  userId  String
 }
+
+enum NotificationProviderType {
+  email
+  discord
+}
+
+model User {
+  uid                   String @id @default(uuid())
+  name                  String
+  email                 String
+  objects               Object[]
+  notificationproviders NotificationProvider[]
+}
+

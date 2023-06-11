@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import sendEmail from "@/providers/email";
+import sendEmail from "@/providers/email/email";
 import prisma from "@/db/prisma";
+import notifyProviders from "@/providers/notifyProviders";
 
 type SenderInfo = {
     name: string,
@@ -32,26 +33,10 @@ export default async function handler(
             where: {
                 uid: requestData.object
             },
-            include: {
-                owner: true
-            }
         })
 
         if (objectData == null) return res.status(401).json({err: "notfound"});
 
-        console.log(requestData)
-        const ownerEmail = (await objectData!.owner).email;
-
-        sendEmail(ownerEmail, requestData, function (error) {
-            if (!error) {
-                res.status(200).json({});
-            }
-            else {
-                res.status(401).json({err: error.message});
-            }
-        });
-
-
-
+        await notifyProviders(objectData.ownerId, requestData);
     }
 }

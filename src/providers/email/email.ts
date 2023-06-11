@@ -1,9 +1,10 @@
 import nodemailer from "nodemailer";
 import {SendingObject} from "@/pages/api/send";
-import email_sample from "@/providers/email_sample";
+import sample from "@/providers/email/sample";
 import {stripHtml} from "string-strip-html";
+import {EmailConfig} from "@/providers/configs";
 
-function sendEmail(address: string, data: SendingObject, callback: (error: Error | null) => void) {
+function sendEmail(config: EmailConfig, data: SendingObject) {
     var transporter = nodemailer.createTransport({
         // @ts-ignore
         host: process.env.SMTP_HOST,
@@ -15,7 +16,7 @@ function sendEmail(address: string, data: SendingObject, callback: (error: Error
         }
     });
 
-    const email_body = email_sample
+    const email_body = sample
         .replace("$CATEGORY$", data.category)
         .replace("$SPECIFIER$", data.specifier)
         .replace("$FREEFORM$", data.freeform != "" ? stripHtml(data.freeform).result.replaceAll(/\n/g, "<br />") : "---")
@@ -28,13 +29,13 @@ function sendEmail(address: string, data: SendingObject, callback: (error: Error
 
     var mailOptions = {
         from: process.env.SMTP_EMAIL,
-        to: address,
+        to: config.email,
         subject: "Neue Nachricht bezüglich deines Autos",
         html: email_body
     }
 
     transporter.sendMail(mailOptions, function (error, info) {
-        callback(error);
+        // TODO: Error handling
     });
 }
 
