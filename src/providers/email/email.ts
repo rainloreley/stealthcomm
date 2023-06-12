@@ -24,9 +24,6 @@ function sendEmail(config: EmailConfig, data: SendingObject) {
         .replace("$SENDER_EMAIL$", data.sender.email != "" ? stripHtml(data.sender.email).result : "---")
         .replace("$SENDER_PHONE$", data.sender.phone != "" ? stripHtml(data.sender.phone).result : "---")
 
-
-    console.log(email_body);
-
     var mailOptions = {
         from: process.env.SMTP_EMAIL,
         to: config.email,

@@ -38,5 +38,7 @@ export default async function handler(
         if (objectData == null) return res.status(401).json({err: "notfound"});
 
         await notifyProviders(objectData.ownerId, requestData);
+
+        res.status(200).json({})
     }
 }
