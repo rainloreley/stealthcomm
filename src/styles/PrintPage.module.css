@@ -1,0 +1,8 @@
+.frame {
+    border: 1px solid #555;
+    width: 7cm;
+    height: 4cm;
+    border-radius: 12px;
+    background-color: black;
+    print-color-adjust: exact;
+}
