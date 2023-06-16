@@ -18,6 +18,7 @@ async function notifyProviders(userId: string, senderInfo: SendingObject) {
                 break;
             case "email":
                 sendEmail(config, senderInfo);
+                break;
         }
     }
 

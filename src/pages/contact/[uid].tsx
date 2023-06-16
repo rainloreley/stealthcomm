@@ -4,8 +4,6 @@ import { useState } from "react";
 import { MaterialSymbol } from 'react-material-symbols';
 import {SendingObject} from "@/pages/api/send";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import {signOut} from "next-auth/react";
-import {createHash} from "crypto";
 // @ts-ignore
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
@@ -101,7 +99,7 @@ export default function ContactOwnerOfObjectPage() {
 
     const router = useRouter()
 
-    const { data, error } = useSWR('/api/object/' + router.query.uid, fetcher)
+    const { data } = useSWR('/api/object/' + router.query.uid, fetcher)
 
     const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
     const [selectedSpecifier, setSelectedSpecifier] = useState<string | null>(null);
@@ -165,7 +163,7 @@ export default function ContactOwnerOfObjectPage() {
                     <div className={"mt-4 mb-2"}>
                         <MaterialSymbol icon={"task_alt"} size={60} color={"#10b981"} />
                     </div>
-                    <p>Der Besitzer wurde benachrichtigt. Du kannst diesen Tab nun schließen.</p>
+                    <p>Der Besitzer von <span className={"text-emerald-500"}>{data.name}</span> wurde benachrichtigt. Du kannst diesen Tab nun schließen.</p>
                 </div>
             </div>
         </main>
