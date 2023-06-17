@@ -35,7 +35,7 @@ enum NotificationProviderType {
 model User {
   uid                   String @id @default(uuid())
   name                  String
-  email                 String
+  email                 String @unique
   objects               Object[]
   notificationproviders NotificationProvider[]
 }

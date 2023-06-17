@@ -20,7 +20,7 @@ const fixedCategories: Category[] = [
         text: "Schaden",
         specifiers: [
             "Ich habe dein Auto beschädigt",
-            "Du hast mein Auto beschädiigt",
+            "Du hast mein Auto beschädigt",
             "Ich habe gesehen wie dein Auto beschädigt wurde"
         ],
         icon: "minor_crash"
