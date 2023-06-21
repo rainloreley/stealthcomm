@@ -36,7 +36,7 @@ function sendEmail(config: EmailConfig, data: SendingObject) {
             console.error(error);
         }
         else {
-            console.info(info);
+            console.info("Email sent");
         }
     });
 }
