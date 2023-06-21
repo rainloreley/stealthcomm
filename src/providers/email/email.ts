@@ -32,7 +32,12 @@ function sendEmail(config: EmailConfig, data: SendingObject) {
     }
 
     transporter.sendMail(mailOptions, function (error, info) {
-        // TODO: Error handling
+        if (error) {
+            console.error(error);
+        }
+        else {
+            console.info(info);
+        }
     });
 }
 
